@@ -9,17 +9,17 @@ int main()
 {
 	char buf[30]="i have sleep 3 second";
 	int fd;
-	fd=open("/tmp/file",O_RDWR|O_CREAT);
+	fd=open("./tmp/file",O_RDWR|O_CREAT);
 	char message_buf[30];
 	int count =1;
 	time_t timep;
 	if(!fork())
-	{
-		setsid();
-		chdir("/");
-		umask(0);
+	{//成为守护进程
+		setsid();//成为新进程组组长和新会话领导，脱离控制终端
+		chdir("./");//设置工作目录为当前目录
+		umask(0);//重设文件访问权限掩码
 		int i;
-		for(i=0;i<3;i++)
+		for(i=0;i<3;i++)//尽可能关闭所有从父进程继承过来的文件
 		{
 			close(i);
 		}

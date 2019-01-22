@@ -1,12 +1,11 @@
-#include <string.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/select.h>
-#include <sys/time.h>
+#include "func.h"
 //管道的写端
+#define SHM_KEY (key_t) 1324
+typedef struct shmmsg{
+	int flag;
+	char buf[4092];
+}shm_buf;
+int shmid,semid;
 int main(int argc,char *argv[])
 {
 	if(argc!=3)
